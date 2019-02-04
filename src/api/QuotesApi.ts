@@ -1,5 +1,6 @@
-const apiBaseUrl = 'http://localhost:8080';
 import { IQuote } from '@/models/models';
+
+const apiBaseUrl = 'http://localhost:8080';
 const quotesEndpoint = 'quotes';
 const peopleEndpoint = 'people';
 
