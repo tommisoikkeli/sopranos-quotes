@@ -7,21 +7,16 @@
 </template>
 
 <script lang="ts">
-  import { Component, Vue, Prop } from 'vue-property-decorator';
+import { Component, Vue, Prop } from 'vue-property-decorator';
 
-  enum ButtonType {
-    DEFAULT = 'default',
-    RANDOM = 'random',
-    RATING = 'rating',
-    DISABLED = 'disabled',
-  }
+type ButtonType = 'default' | 'random' | 'rating' | 'liked';
 
-  @Component
-  export default class Button extends Vue {
-    @Prop() private content!: string;
-    @Prop() private type!: ButtonType;
-    @Prop() private onClick!: () => void;
-  }
+@Component
+export default class Button extends Vue {
+  @Prop() private content!: string;
+  @Prop() private type!: ButtonType;
+  @Prop() private onClick!: () => void;
+}
 </script>
 
 <style lang="scss">

@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <Button content="Get a random quote!" type="random" v-bind:onClick="getRandomQuote"/>
+    <Button content="Get a random quote!" type="random" :onClick="getRandomQuote"/>
     <p>{{ quote }}</p>
   </div>
 </template>
