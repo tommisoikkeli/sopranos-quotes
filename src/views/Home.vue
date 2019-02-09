@@ -1,30 +1,46 @@
 <template>
   <div class="home">
-    <Button content="Get a random quote!" type="random" :onClick="getRandomQuote"/>
-    <p>{{ quote }}</p>
+    <QuoteCard :onQuoteCardButtonClick="rateQuote" :quote="this.quote"/>
+    <Button type="random" content="Get a random quote!" :onClick="getRandomQuote"/>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import Button from '@/components/Button.vue';
 import QuotesApi from '@/api/QuotesApi';
 import { IQuote } from '@/models/models';
+import QuoteCard from '@/components/QuoteCard.vue';
+import Button from '@/components/Button.vue';
 
 @Component({
   components: {
+    QuoteCard,
     Button,
   },
 })
 export default class Home extends Vue {
-  private quote: string = '';
+  private quote: IQuote = {} as IQuote;
 
-  private mounted() {
+  private mounted(): void {
     this.getRandomQuote();
   }
 
   private getRandomQuote(): void {
-    QuotesApi.getRandomQuote().then((quote: IQuote) => this.quote = quote.quoteText);
+    QuotesApi.getRandomQuote().then((quote: IQuote) => this.quote = quote);
+  }
+
+  private rateQuote(): void {
+    console.log('+1');
   }
 }
 </script>
+
+<style lang="scss">
+.home {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+</style>
+
