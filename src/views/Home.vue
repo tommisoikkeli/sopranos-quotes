@@ -43,4 +43,3 @@ export default class Home extends Vue {
   align-items: center;
 }
 </style>
-

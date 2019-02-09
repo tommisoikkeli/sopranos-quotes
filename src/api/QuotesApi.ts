@@ -1,4 +1,4 @@
-import { IQuote } from '@/models/models';
+import { IQuote, IPerson } from '@/models/models';
 
 const apiBaseUrl = 'http://localhost:8080';
 const quotesEndpoint = 'quotes';
@@ -8,6 +8,14 @@ export default {
   async getRandomQuote(): Promise<IQuote> {
     try {
       const response = await fetch(`${apiBaseUrl}/${quotesEndpoint}/random`);
+      return response.json();
+    } catch (e) {
+      throw e;
+    }
+  },
+  async getPeople(): Promise<IPerson[]> {
+    try {
+      const response = await fetch(`${apiBaseUrl}/${peopleEndpoint}`);
       return response.json();
     } catch (e) {
       throw e;

@@ -10,4 +10,3 @@ export default class Img extends Vue {
   @Prop() private source!: string;
 }
 </script>
-

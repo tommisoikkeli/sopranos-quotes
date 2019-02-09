@@ -56,4 +56,3 @@ export default class QuoteCard extends Vue {
     }
 }
 </style>
-
