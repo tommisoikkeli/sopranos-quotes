@@ -21,4 +21,12 @@ export default {
       throw e;
     }
   },
+  async getAllQuotesForPerson(id: number): Promise<IPerson> {
+    try {
+      const response = await fetch(`${apiBaseUrl}/${peopleEndpoint}/${id}`);
+      return response.json();
+    } catch (e) {
+      throw e;
+    }
+  },
 };

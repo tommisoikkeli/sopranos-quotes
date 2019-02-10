@@ -1,7 +1,7 @@
 <template>
   <div v-if="isQuoteDefined" class="quote-card-container">
-    <h3>{{ quote.person.name }}</h3>
-    <Img :source="quote.person.image"/>
+    <h3 v-if="isRandom">{{ quote.person.name }}</h3>
+    <Img v-if="hasImage" :source="quote.person.image"/>
     <div class="quote-text">
       <p>{{ quote.quoteText }}</p>
     </div>
@@ -27,6 +27,8 @@ import { IQuote } from '@/models/models';
 export default class QuoteCard extends Vue {
   @Prop() private quote!: IQuote;
   @Prop() private onQuoteCardButtonClick!: () => void;
+  @Prop({default: true}) private hasImage!: boolean;
+  @Prop({default: true}) private isRandom!: boolean;
 
   private get isQuoteDefined(): boolean {
     return Object.keys(this.quote).length > 0;
@@ -45,6 +47,7 @@ export default class QuoteCard extends Vue {
     padding: 12px;
     border: 1px solid $border-color;
     margin-bottom: 30px;
+    box-shadow: 1px 1px 1px 0 $card-box-shadow;
     width: 500px;
 
     .quote-card-rating {

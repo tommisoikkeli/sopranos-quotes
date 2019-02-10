@@ -14,11 +14,14 @@ export default new Router({
     {
       path: '/people',
       name: 'people',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
       component: () =>
-        import(/* webpackChunkName: "about" */ './views/People.vue'),
+        import('./views/People.vue'),
+    },
+    {
+      path: '/people/:id',
+      name: 'quotes',
+      component: () =>
+        import('./views/Quotes.vue'),
     },
   ],
 });
