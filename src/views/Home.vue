@@ -30,7 +30,8 @@ export default class Home extends Vue {
   }
 
   private rateQuote(): void {
-    console.log('+1');
+    QuotesApi.saveQuoteRating(this.quote.id)
+      .then((updatedQuote: IQuote) => this.quote = updatedQuote);
   }
 }
 </script>

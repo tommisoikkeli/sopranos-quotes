@@ -29,4 +29,12 @@ export default {
       throw e;
     }
   },
+  async saveQuoteRating(id: number): Promise<IQuote> {
+    try {
+      const response = await fetch(`${apiBaseUrl}/${quotesEndpoint}/${id}`, {method: 'PUT'});
+      return response.json();
+    } catch (e) {
+      throw e;
+    }
+  },
 };
