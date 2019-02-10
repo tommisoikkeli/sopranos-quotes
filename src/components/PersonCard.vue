@@ -26,6 +26,8 @@ export default class PersonCard extends Vue {
 </script>
 
 <style lang="scss">
+@import "@/styles/variables.scss";
+
 .people-view {
   display: flex;
   justify-content: space-between;
@@ -37,10 +39,19 @@ export default class PersonCard extends Vue {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    border: 1px solid black;
-    padding: 12px;
+    border: 1px solid $border-color;
+    box-shadow: $box-shadow;
+    padding: $card-padding;
     margin: 10px 0;
     width: 400px;
+
+    img {
+      width: 220px;
+      height: 220px;
+      object-fit: cover;
+      margin-bottom: 20px;
+      border-radius: 50%;
+    }
 }
 }
 </style>

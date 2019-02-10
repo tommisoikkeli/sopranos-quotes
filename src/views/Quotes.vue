@@ -50,7 +50,11 @@ export default class Quotes extends Vue {
   align-items: center;
 
   img {
+    object-fit: cover;
+    width: 280px;
+    height: 280px;
     margin-bottom: 20px;
+    border-radius: 5px;
   }
 }
 </style>

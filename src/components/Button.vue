@@ -33,6 +33,9 @@ export default class Button extends Vue {
     &.default {
       background: $default-button-background;
       border-radius: 3px;
+      &:hover {
+        background: darken($default-button-background, 5%);
+      }
     }
 
     &.random {

@@ -40,22 +40,29 @@ export default class QuoteCard extends Vue {
 @import "@/styles/variables.scss";
 
 .quote-card-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    padding: 12px;
-    border: 1px solid $border-color;
-    margin-bottom: 30px;
-    box-shadow: 1px 1px 1px 0 $card-box-shadow;
-    width: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: $card-padding;
+  border: 1px solid $border-color;
+  margin-bottom: 15px;
+  box-shadow: $box-shadow;
+  width: 500px;
 
-    .quote-card-rating {
-      display: flex;
-      align-items: center;
-      button {
-        margin-left: 10px;
-      }
+  img {
+    object-fit: cover;
+    width: 280px;
+    height: 280px;
+    border-radius: 5px;
+  }
+
+  .quote-card-rating {
+    display: flex;
+    align-items: center;
+    button {
+      margin-left: 10px;
     }
+  }
 }
 </style>
