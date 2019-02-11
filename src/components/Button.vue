@@ -1,5 +1,5 @@
 <template>
-  <button :class="['button', type]" @click="onClick">
+  <button :class="['button', type]" @click="onClick" :disabled="isDisabled" :title="isDisabled && 'Already rated'">
     <div class="button-content">
       {{ content }}
     </div>
@@ -16,6 +16,10 @@ export default class Button extends Vue {
   @Prop() private content!: string;
   @Prop() private type!: ButtonType;
   @Prop() private onClick!: () => void;
+
+  private get isDisabled(): boolean {
+    return this.type === 'liked';
+  }
 }
 </script>
 
@@ -53,6 +57,7 @@ export default class Button extends Vue {
       background: $rating-button-background;
       color: $white;
       border-radius: 25px;
+      border: none;
       &:focus {
         outline: 2px solid $rating-button-outline;
       }
@@ -63,8 +68,14 @@ export default class Button extends Vue {
 
     &.liked {
       background: $rating-button-background;
-      color: red;
+      color: $liked-button-red;
       border-radius: 25px;
+      font-weight: bold;
+      border:none;
+      
+      &:hover {
+        cursor: not-allowed;
+      }
     }
   }
 </style>

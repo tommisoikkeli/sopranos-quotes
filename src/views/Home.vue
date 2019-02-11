@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <QuoteCard :onQuoteCardButtonClick="rateQuote" :quote="this.quote"/>
+    <QuoteCard :onQuoteCardButtonClick="rateQuote" :quote="this.quote" :isQuoteRated="isQuoteRated !== -1"/>
     <Button type="random" content="Get a random quote!" :onClick="getRandomQuote"/>
   </div>
 </template>
@@ -11,7 +11,7 @@ import QuotesApi from '@/api/QuotesApi';
 import { IQuote } from '@/models/models';
 import QuoteCard from '@/components/QuoteCard.vue';
 import Button from '@/components/Button.vue';
-import { setLocalStorageItem } from '@/utils/utils';
+import { setLocalStorageItem, getLocalStorageItems } from '@/utils/utils';
 
 @Component({
   components: {
@@ -21,6 +21,7 @@ import { setLocalStorageItem } from '@/utils/utils';
 })
 export default class Home extends Vue {
   private quote: IQuote = {} as IQuote;
+  private ratedQuotes: IQuote[] = getLocalStorageItems('ratedQuotes');
 
   private mounted(): void {
     this.getRandomQuote();
@@ -34,6 +35,10 @@ export default class Home extends Vue {
     QuotesApi.saveQuoteRating(this.quote.id)
       .then((updatedQuote: IQuote) => this.quote = updatedQuote)
       .then(() => setLocalStorageItem('ratedQuotes', this.quote));
+  }
+
+  private get isQuoteRated(): number {
+    return this.ratedQuotes.map((item: IQuote) => item.id).indexOf(this.quote.id);
   }
 }
 </script>

@@ -7,7 +7,7 @@
     </div>
     <div class="quote-card-rating">
       <p>Rating: {{ quote.rating }}</p>
-      <Button type="rating" content="+1" :onClick="onQuoteCardButtonClick"/>
+      <Button :type="isQuoteRated ? 'liked' : 'rating'" content="+1" :onClick="onQuoteCardButtonClick"/>
     </div>
   </div>
 </template>
@@ -29,6 +29,7 @@ export default class QuoteCard extends Vue {
   @Prop() private onQuoteCardButtonClick!: () => void;
   @Prop({default: true}) private hasImage!: boolean;
   @Prop({default: true}) private isRandom!: boolean;
+  @Prop({default: false}) private isQuoteRated!: boolean;
 
   private get isQuoteDefined(): boolean {
     return Object.keys(this.quote).length > 0;
