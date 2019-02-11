@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <QuoteCard :onQuoteCardButtonClick="rateQuote" :quote="this.quote" :isQuoteRated="isQuoteRated !== -1"/>
+    <QuoteCard :onQuoteCardButtonClick="rateQuote" :quote="this.quote" :isQuoteRated="isQuoteRated"/>
     <Button type="random" content="Get a random quote!" :onClick="getRandomQuote"/>
   </div>
 </template>
@@ -37,8 +37,8 @@ export default class Home extends Vue {
       .then(() => setLocalStorageItem('ratedQuotes', this.quote));
   }
 
-  private get isQuoteRated(): number {
-    return this.ratedQuotes.map((item: IQuote) => item.id).indexOf(this.quote.id);
+  private get isQuoteRated(): boolean {
+    return this.ratedQuotes.map((item: IQuote) => item.id).indexOf(this.quote.id) !== -1;
   }
 }
 </script>
