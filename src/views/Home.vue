@@ -11,6 +11,7 @@ import QuotesApi from '@/api/QuotesApi';
 import { IQuote } from '@/models/models';
 import QuoteCard from '@/components/QuoteCard.vue';
 import Button from '@/components/Button.vue';
+import { setLocalStorageItem } from '@/utils/utils';
 
 @Component({
   components: {
@@ -31,7 +32,8 @@ export default class Home extends Vue {
 
   private rateQuote(): void {
     QuotesApi.saveQuoteRating(this.quote.id)
-      .then((updatedQuote: IQuote) => this.quote = updatedQuote);
+      .then((updatedQuote: IQuote) => this.quote = updatedQuote)
+      .then(() => setLocalStorageItem('ratedQuotes', this.quote));
   }
 }
 </script>

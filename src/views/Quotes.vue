@@ -1,7 +1,7 @@
 <template>
   <div class="quotes-container">
     <h3>{{ personInfo.name }}</h3>
-    <Img :source="personInfo.image"/>
+    <Img :source="personInfo.image" type="default"/>
     <div v-for="quote in personInfo.quotes" v-bind:key="quote.id">
       <QuoteCard :quote="quote" :hasImage="false" :isRandom="false" :onQuoteCardButtonClick="rateQuote.bind(this, quote.id)"/>
     </div>
@@ -48,14 +48,6 @@ export default class Quotes extends Vue {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
-  img {
-    object-fit: cover;
-    width: 280px;
-    height: 280px;
-    margin-bottom: 20px;
-    border-radius: 5px;
-  }
 }
 </style>
 

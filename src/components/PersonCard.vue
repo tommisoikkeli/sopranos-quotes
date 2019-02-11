@@ -1,7 +1,7 @@
 <template>
   <div class="person-card-container">
     <h3>{{ person.name }}</h3>
-    <Img :source="person.image"/>
+    <Img :source="person.image" type="round"/>
     <router-link :to="`/people/${person.id}`">
       <Button content="See quotes" type="default" :onClick="() => false"/>
     </router-link>
@@ -44,14 +44,6 @@ export default class PersonCard extends Vue {
     padding: $card-padding;
     margin: 10px 0;
     width: 400px;
-
-    img {
-      width: 220px;
-      height: 220px;
-      object-fit: cover;
-      margin-bottom: 20px;
-      border-radius: 50%;
-    }
 }
 }
 </style>

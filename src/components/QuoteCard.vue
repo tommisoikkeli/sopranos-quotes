@@ -1,7 +1,7 @@
 <template>
   <div v-if="isQuoteDefined" class="quote-card-container">
     <h3 v-if="isRandom">{{ quote.person.name }}</h3>
-    <Img v-if="hasImage" :source="quote.person.image"/>
+    <Img v-if="hasImage" :source="quote.person.image" type="default"/>
     <div class="quote-text">
       <p>{{ quote.quoteText }}</p>
     </div>
@@ -49,13 +49,6 @@ export default class QuoteCard extends Vue {
   margin-bottom: 15px;
   box-shadow: $box-shadow;
   width: 500px;
-
-  img {
-    object-fit: cover;
-    width: 280px;
-    height: 280px;
-    border-radius: 5px;
-  }
 
   .quote-card-rating {
     display: flex;
