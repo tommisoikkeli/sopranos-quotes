@@ -33,7 +33,7 @@ export default class Quotes extends Vue {
 
   private rateQuote(id: number): void {
     QuotesApi.saveQuoteRating(id)
-    .then(() => setLocalStorageItem('ratedQuotes', findById(this.personInfo.quotes, id)))
+    .then((ratedQuote: IQuote) => setLocalStorageItem('ratedQuotes', ratedQuote))
     .then(() => this.ratedQuotes = this.getRatedQuotes())
     .then(() => this.getAllQuotesForPerson());
   }

@@ -1,7 +1,7 @@
 <template>
   <div class="best-quotes">
     <div v-for="quote in quotes" v-bind:key="quote.id">
-      <QuoteCard :quote="quote" :onQuoteCardButtonClick="rateQuote.bind(this, quote.id)"/>
+      <QuoteCard :quote="quote" :onQuoteCardButtonClick="rateQuote.bind(this, quote.id)" :isQuoteRated="isQuoteRated(quote.id)"/>
     </div>
   </div>
 </template>
@@ -11,6 +11,7 @@ import { Component, Vue, Prop } from 'vue-property-decorator';
 import QuotesApi from '@/api/QuotesApi';
 import { IQuote } from '@/models/models';
 import QuoteCard from '@/components/QuoteCard.vue';
+import { setLocalStorageItem, getLocalStorageItems, isRated } from '@/utils/utils';
 
 @Component({
   components: {
@@ -19,10 +20,10 @@ import QuoteCard from '@/components/QuoteCard.vue';
 })
 export default class BestQuotes extends Vue {
   private quotes: IQuote[] = [];
+  private ratedQuotes: IQuote[] = this.getRatedQuotes();
 
   private mounted() {
     this.getTopRatedQuotes();
-    setTimeout(() => console.log(this.quotes), 1000);
   }
 
   private getTopRatedQuotes(): void {
@@ -30,7 +31,18 @@ export default class BestQuotes extends Vue {
   }
 
   private rateQuote(id: number) {
-    console.log('+1', id);
+    QuotesApi.saveQuoteRating(id)
+    .then((ratedQuote: IQuote) => setLocalStorageItem('ratedQuotes', ratedQuote))
+    .then(() => this.ratedQuotes = this.getRatedQuotes())
+    .then(() => this.getTopRatedQuotes());
+  }
+
+  private isQuoteRated(id: number): boolean {
+    return isRated(this.ratedQuotes, id);
+  }
+
+  private getRatedQuotes(): IQuote[] {
+    return getLocalStorageItems('ratedQuotes');
   }
 }
 </script>
