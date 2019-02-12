@@ -23,5 +23,11 @@ export default new Router({
       component: () =>
         import('./views/Quotes.vue'),
     },
+    {
+      path: '/best',
+      name: 'best',
+      component: () =>
+        import('./views/BestQuotes.vue'),
+    },
   ],
 });

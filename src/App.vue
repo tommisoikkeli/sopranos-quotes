@@ -2,7 +2,8 @@
   <div id="app">
     <div id="nav">
       <router-link to="/">Home</router-link> |
-      <router-link to="/people">People</router-link>
+      <router-link to="/people">People</router-link> |
+      <router-link to="/best">Best quotes</router-link>
     </div>
     <router-view/>
   </div>
@@ -14,6 +15,10 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 #nav {
   padding: 30px;

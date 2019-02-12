@@ -37,4 +37,12 @@ export default {
       throw e;
     }
   },
+  async getTopRatedQuotes(): Promise<IQuote[]> {
+    try {
+      const response = await fetch(`${apiBaseUrl}/${quotesEndpoint}/best`);
+      return response.json();
+    } catch (e) {
+      throw e;
+    }
+  },
 };

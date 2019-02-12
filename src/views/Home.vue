@@ -11,7 +11,7 @@ import QuotesApi from '@/api/QuotesApi';
 import { IQuote } from '@/models/models';
 import QuoteCard from '@/components/QuoteCard.vue';
 import Button from '@/components/Button.vue';
-import { setLocalStorageItem, getLocalStorageItems } from '@/utils/utils';
+import { setLocalStorageItem, getLocalStorageItems, isRated } from '@/utils/utils';
 
 @Component({
   components: {
@@ -21,7 +21,7 @@ import { setLocalStorageItem, getLocalStorageItems } from '@/utils/utils';
 })
 export default class Home extends Vue {
   private quote: IQuote = {} as IQuote;
-  private ratedQuotes: IQuote[] = getLocalStorageItems('ratedQuotes');
+  private ratedQuotes: IQuote[] = this.getRatedQuotes();
 
   private mounted(): void {
     this.getRandomQuote();
@@ -34,20 +34,16 @@ export default class Home extends Vue {
   private rateQuote(): void {
     QuotesApi.saveQuoteRating(this.quote.id)
       .then((updatedQuote: IQuote) => this.quote = updatedQuote)
-      .then(() => setLocalStorageItem('ratedQuotes', this.quote));
+      .then(() => setLocalStorageItem('ratedQuotes', this.quote))
+      .then(() => this.ratedQuotes = this.getRatedQuotes());
+  }
+
+  private getRatedQuotes(): IQuote[] {
+    return getLocalStorageItems('ratedQuotes');
   }
 
   private get isQuoteRated(): boolean {
-    return this.ratedQuotes.map((item: IQuote) => item.id).indexOf(this.quote.id) !== -1;
+    return isRated(this.ratedQuotes, this.quote.id);
   }
 }
 </script>
-
-<style lang="scss">
-.home {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-</style>
