@@ -41,7 +41,7 @@ export default class Quotes extends Vue {
   private getAllQuotesForPerson(): void {
     QuotesApi.getAllQuotesForPerson(parseInt(this.$route.params.id, 10))
       .then((personData: IPerson) => this.personInfo = personData)
-      .then((personData: IPerson) => {
+      .then(() => {
         this.personInfo.quotes.sort((a, b) => b.rating - a.rating);
       });
   }
