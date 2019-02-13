@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <QuoteCard :onQuoteCardButtonClick="rateQuote" :quote="this.quote" :isQuoteRated="isQuoteRated"/>
-    <Button type="random" content="Get a random quote!" :onClick="getRandomQuote"/>
+    <Button type="random" content="Get a random quote!" :onClick="getRandomQuote" id="random-button"/>
   </div>
 </template>
 
@@ -11,7 +11,9 @@ import QuotesApi from '@/api/QuotesApi';
 import { IQuote } from '@/models/models';
 import QuoteCard from '@/components/QuoteCard.vue';
 import Button from '@/components/Button.vue';
-import { setLocalStorageItem, getLocalStorageItems, isRated } from '@/utils/utils';
+import { setLocalStorageItem, getLocalStorageItems, isRated, disableButtonForTimeout } from '@/utils/utils';
+
+const BUTTON_TIMEOUT: number = 2000;
 
 @Component({
   components: {
@@ -29,6 +31,7 @@ export default class Home extends Vue {
 
   private getRandomQuote(): void {
     QuotesApi.getRandomQuote().then((quote: IQuote) => this.quote = quote);
+    disableButtonForTimeout('random-button', BUTTON_TIMEOUT);
   }
 
   private rateQuote(): void {

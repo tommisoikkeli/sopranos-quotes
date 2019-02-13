@@ -15,7 +15,7 @@ import QuoteCard from '@/components/QuoteCard.vue';
 import { IPerson, IQuote } from '@/models/models';
 import QuotesApi from '@/api/QuotesApi';
 import Img from '@/components/Img.vue';
-import { getLocalStorageItems, setLocalStorageItem, findById, isRated } from '@/utils/utils';
+import { getLocalStorageItems, setLocalStorageItem, isRated } from '@/utils/utils';
 
 @Component({
   components: {

@@ -15,11 +15,16 @@ export function getLocalStorageItems(key: string) {
   return JSON.parse(localStorage.getItem(key) || '[]');
 }
 
-export function findById(quotes: IQuote[], id: number): IQuote {
-  const result = quotes.filter((i: IQuote) => i.id === id);
-  return result[0];
-}
-
 export function isRated(quotes: IQuote[], id: number): boolean {
   return quotes.map((i: IQuote) => i.id).indexOf(id) !== -1;
+}
+
+export function disableButtonForTimeout(buttonId: string, timeout: number): void {
+  const target: HTMLButtonElement = document.getElementById(buttonId) as HTMLButtonElement;
+  if (target) {
+    target.disabled = true;
+    setTimeout(() => {
+      target.disabled = false;
+    }, timeout);
+  }
 }
