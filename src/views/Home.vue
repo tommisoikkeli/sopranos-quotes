@@ -1,5 +1,8 @@
 <template>
   <div class="home">
+    <div v-if="hasError" class="error">
+      <p>Sorry, something went wrong.</p>
+    </div>
     <QuoteCard :onQuoteCardButtonClick="rateQuote" :quote="this.quote" :isQuoteRated="isQuoteRated"/>
     <Button type="random" content="Get a random quote!" :onClick="getRandomQuote" id="random-button"/>
   </div>
@@ -24,13 +27,15 @@ const BUTTON_TIMEOUT: number = 2000;
 export default class Home extends Vue {
   private quote: IQuote = {} as IQuote;
   private ratedQuotes: IQuote[] = this.getRatedQuotes();
+  private hasError: boolean = false;
 
-  private mounted(): void {
+  private created(): void {
     this.getRandomQuote();
   }
 
   private getRandomQuote(): void {
-    QuotesApi.getRandomQuote().then((quote: IQuote) => this.quote = quote);
+    QuotesApi.getRandomQuote().then((quote: IQuote) => this.quote = quote)
+    .catch((e) => this.hasError = true);
     disableButtonForTimeout('random-button', BUTTON_TIMEOUT);
   }
 
@@ -38,7 +43,8 @@ export default class Home extends Vue {
     QuotesApi.saveQuoteRating(this.quote.id)
       .then((updatedQuote: IQuote) => this.quote = updatedQuote)
       .then(() => setLocalStorageItem('ratedQuotes', this.quote))
-      .then(() => this.ratedQuotes = this.getRatedQuotes());
+      .then(() => this.ratedQuotes = this.getRatedQuotes())
+      .catch((e) => this.hasError = true);
   }
 
   private getRatedQuotes(): IQuote[] {
@@ -50,3 +56,15 @@ export default class Home extends Vue {
   }
 }
 </script>
+
+<style lang="scss">
+@import "@/styles/variables.scss";
+
+.error {
+  border: 1px solid $error-red;
+  background: $error-red;
+  margin-bottom: 10px;
+  border-radius: 3px;
+}
+</style>
+

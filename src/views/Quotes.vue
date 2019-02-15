@@ -1,5 +1,8 @@
 <template>
   <div class="quotes-container">
+    <div v-if="hasError" class="error">
+      <p>Sorry, something went wrong.</p>
+    </div>
     <h3>{{ personInfo.name }}</h3>
     <Img :source="personInfo.image" type="default"/>
     <div v-for="quote in personInfo.quotes" v-bind:key="quote.id">
@@ -26,8 +29,9 @@ import { getLocalStorageItems, setLocalStorageItem, isRated } from '@/utils/util
 export default class Quotes extends Vue {
   private personInfo: IPerson = {} as IPerson;
   private ratedQuotes: IQuote[] = this.getRatedQuotes();
+  private hasError: boolean = false;
 
-  private mounted() {
+  private created() {
     this.getAllQuotesForPerson();
   }
 
@@ -35,7 +39,8 @@ export default class Quotes extends Vue {
     QuotesApi.saveQuoteRating(id)
     .then((ratedQuote: IQuote) => setLocalStorageItem('ratedQuotes', ratedQuote))
     .then(() => this.ratedQuotes = this.getRatedQuotes())
-    .then(() => this.getAllQuotesForPerson());
+    .then(() => this.getAllQuotesForPerson())
+    .catch((e) => this.hasError = true);
   }
 
   private getAllQuotesForPerson(): void {
@@ -43,7 +48,8 @@ export default class Quotes extends Vue {
       .then((personData: IPerson) => this.personInfo = personData)
       .then(() => {
         this.personInfo.quotes.sort((a, b) => b.rating - a.rating);
-      });
+      })
+      .catch((e) => this.hasError = true);
   }
 
   private isQuoteRated(id: number): boolean {
@@ -62,6 +68,10 @@ export default class Quotes extends Vue {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  .error {
+    padding: 10px;
+  }
 }
 </style>
 

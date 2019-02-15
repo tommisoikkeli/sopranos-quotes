@@ -54,6 +54,7 @@ export default class Button extends Vue {
     }
     &:disabled {
       animation: fill 2s linear;
+      cursor: not-allowed;
     }
   }
 
