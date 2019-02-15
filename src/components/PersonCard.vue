@@ -27,12 +27,17 @@ export default class PersonCard extends Vue {
 
 <style lang="scss">
 @import "@/styles/variables.scss";
+@import "@/styles/mixins.scss";
 
 .people-view {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   flex-wrap: wrap;
-  margin: 0 15px;
+
+  @include tablet {
+    flex-direction: column;
+    flex-wrap: nowrap;
+  }
 
   .person-card-container {
     display: flex;
@@ -42,8 +47,18 @@ export default class PersonCard extends Vue {
     border: 1px solid $border-color;
     box-shadow: $box-shadow;
     padding: $card-padding;
-    margin: 10px 0;
+    margin: 10px;
     width: 400px;
+
+    @include tablet {
+      width: 300px;
+    }
+
+    @include mobile {
+      width: 280px;
+      margin: 8px;
+      padding: 8px;
+    }
 }
 }
 </style>

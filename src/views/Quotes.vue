@@ -68,10 +68,6 @@ export default class Quotes extends Vue {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
-  .error {
-    padding: 10px;
-  }
 }
 </style>
 

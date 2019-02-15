@@ -19,5 +19,6 @@ export default class Error extends Vue {}
   background: $error-red;
   margin-bottom: 10px;
   border-radius: 3px;
+  padding: 10px;
 }
 </style>

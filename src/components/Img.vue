@@ -15,11 +15,23 @@ export default class Img extends Vue {
 </script>
 
 <style lang="scss">
+@import "@/styles/mixins.scss";
+
 .image {
   object-fit: cover;
   width: 280px;
   height: 280px;
   margin-bottom: 10px;
+
+  @include tablet {
+    width: 230px;
+    height: 230px;
+  }
+
+  @include mobile {
+    width: 200px;
+    height: 200px;
+  }
 
   &.default {
     border-radius: 5px;

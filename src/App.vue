@@ -11,6 +11,7 @@
 
 <style lang="scss">
 @import "@/styles/variables.scss";
+@import "@/styles/mixins.scss";
 
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
@@ -31,6 +32,10 @@
     font-weight: bold;
     color: $router-link;
     text-decoration: none;
+
+    @include mobile {
+      margin-right: 12px;
+    }
     &:hover {
       color: $router-link-active;
     }

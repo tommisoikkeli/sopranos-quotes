@@ -49,6 +49,8 @@ export default class Button extends Vue {
     height: 150px;
     outline: none;
     border: 1px solid $border-color;
+    background: $white;
+    color: $black;
     &:hover {
       border-color: darken($border-color, 20%);
     }

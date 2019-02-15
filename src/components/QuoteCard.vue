@@ -39,6 +39,7 @@ export default class QuoteCard extends Vue {
 
 <style lang="scss">
 @import "@/styles/variables.scss";
+@import "@/styles/mixins.scss";
 
 .quote-card-container {
   display: flex;
@@ -50,6 +51,16 @@ export default class QuoteCard extends Vue {
   margin-bottom: 15px;
   box-shadow: $box-shadow;
   width: 500px;
+
+  @include tablet {
+    width: 400px;
+  }
+
+  @include mobile {
+    width: 280px;
+    padding: 8px;
+    margin-bottom: 10px;
+  }
 
   .quote-card-rating {
     display: flex;
