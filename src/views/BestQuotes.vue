@@ -1,8 +1,6 @@
 <template>
   <div class="best-quotes">
-    <div v-if="hasError" class="error">
-      <p>Sorry, something went wrong.</p>
-    </div>
+    <Error v-if="hasError"/>
     <div v-for="quote in quotes" v-bind:key="quote.id">
       <QuoteCard :quote="quote" :onQuoteCardButtonClick="rateQuote.bind(this, quote.id)" :isQuoteRated="isQuoteRated(quote.id)"/>
     </div>
@@ -15,10 +13,12 @@ import QuotesApi from '@/api/QuotesApi';
 import { IQuote } from '@/models/models';
 import QuoteCard from '@/components/QuoteCard.vue';
 import { setLocalStorageItem, getLocalStorageItems, isRated } from '@/utils/utils';
+import Error from '@/components/Error.vue';
 
 @Component({
   components: {
     QuoteCard,
+    Error,
   },
 })
 export default class BestQuotes extends Vue {

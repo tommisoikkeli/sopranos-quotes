@@ -1,8 +1,6 @@
 <template>
   <div class="quotes-container">
-    <div v-if="hasError" class="error">
-      <p>Sorry, something went wrong.</p>
-    </div>
+    <Error v-if="hasError"/>
     <h3>{{ personInfo.name }}</h3>
     <Img :source="personInfo.image" type="default"/>
     <div v-for="quote in personInfo.quotes" v-bind:key="quote.id">
@@ -19,11 +17,13 @@ import { IPerson, IQuote } from '@/models/models';
 import QuotesApi from '@/api/QuotesApi';
 import Img from '@/components/Img.vue';
 import { getLocalStorageItems, setLocalStorageItem, isRated } from '@/utils/utils';
+import Error from '@/components/Error.vue';
 
 @Component({
   components: {
     QuoteCard,
     Img,
+    Error,
   },
 })
 export default class Quotes extends Vue {

@@ -1,8 +1,6 @@
 <template>
   <div class="home">
-    <div v-if="hasError" class="error">
-      <p>Sorry, something went wrong.</p>
-    </div>
+    <Error v-if="hasError"/>
     <QuoteCard :onQuoteCardButtonClick="rateQuote" :quote="this.quote" :isQuoteRated="isQuoteRated"/>
     <Button type="random" content="Get a random quote!" :onClick="getRandomQuote" id="random-button"/>
   </div>
@@ -15,6 +13,7 @@ import { IQuote } from '@/models/models';
 import QuoteCard from '@/components/QuoteCard.vue';
 import Button from '@/components/Button.vue';
 import { setLocalStorageItem, getLocalStorageItems, isRated, disableButtonForTimeout } from '@/utils/utils';
+import Error from '@/components/Error.vue';
 
 const BUTTON_TIMEOUT: number = 2000;
 
@@ -22,6 +21,7 @@ const BUTTON_TIMEOUT: number = 2000;
   components: {
     QuoteCard,
     Button,
+    Error,
   },
 })
 export default class Home extends Vue {
@@ -56,15 +56,3 @@ export default class Home extends Vue {
   }
 }
 </script>
-
-<style lang="scss">
-@import "@/styles/variables.scss";
-
-.error {
-  border: 1px solid $error-red;
-  background: $error-red;
-  margin-bottom: 10px;
-  border-radius: 3px;
-}
-</style>
-

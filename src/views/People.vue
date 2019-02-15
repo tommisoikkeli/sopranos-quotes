@@ -1,8 +1,6 @@
 <template>
   <div>
-    <div v-if="hasError" class="error">
-      <p>Sorry, something went wrong.</p>
-    </div>
+    <Error v-if="hasError"/>
     <div class="people-view">
       <div v-for="person in people" :key="person.id">
         <PersonCard :person="person"/>
@@ -16,10 +14,12 @@ import { Component, Vue, Prop } from 'vue-property-decorator';
 import { IPerson } from '@/models/models';
 import QuotesApi from '@/api/QuotesApi';
 import PersonCard from '@/components/PersonCard.vue';
+import Error from '@/components/Error.vue';
 
 @Component({
   components: {
     PersonCard,
+    Error,
   },
 })
 export default class People extends Vue {
