@@ -1,7 +1,6 @@
 <template>
   <div class="person-card-container">
-    <h3>{{ person.name }}</h3>
-    <Img :source="person.image" type="round"/>
+    <NameLink :url="person.url" :name="person.name"/>
     <router-link :to="`/people/${person.id}`">
       <Button content="See quotes" type="default" :onClick="() => false"/>
     </router-link>
@@ -12,12 +11,12 @@
 import { Component, Vue, Prop } from 'vue-property-decorator';
 import { IPerson } from '@/models/models';
 import Button from '@/components/Button.vue';
-import Img from '@/components/Img.vue';
+import NameLink from '@/components/NameLink.vue';
 
 @Component({
   components: {
     Button,
-    Img,
+    NameLink,
   },
 })
 export default class PersonCard extends Vue {

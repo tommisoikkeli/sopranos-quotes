@@ -1,10 +1,9 @@
 <template>
   <div class="quotes-container">
     <Error v-if="hasError"/>
-    <h3>{{ personInfo.name }}</h3>
-    <Img :source="personInfo.image" type="default"/>
+    <NameLink :url="personInfo.url" :name="personInfo.name"/>
     <div v-for="quote in personInfo.quotes" v-bind:key="quote.id">
-      <QuoteCard :quote="quote" :hasImage="false" :isRandom="false" :onQuoteCardButtonClick="rateQuote.bind(this, quote.id)"
+      <QuoteCard :quote="quote" :hasLink="false" :isRandom="false" :onQuoteCardButtonClick="rateQuote.bind(this, quote.id)"
                   :isQuoteRated="isQuoteRated(quote.id)"/>
     </div>
   </div>
@@ -15,14 +14,14 @@ import { Component, Vue, Prop } from 'vue-property-decorator';
 import QuoteCard from '@/components/QuoteCard.vue';
 import { IPerson, IQuote } from '@/models/models';
 import QuotesApi from '@/api/QuotesApi';
-import Img from '@/components/Img.vue';
 import { getLocalStorageItems, setLocalStorageItem, isRated } from '@/utils/utils';
 import Error from '@/components/Error.vue';
+import NameLink from '@/components/NameLink.vue';
 
 @Component({
   components: {
     QuoteCard,
-    Img,
+    NameLink,
     Error,
   },
 })

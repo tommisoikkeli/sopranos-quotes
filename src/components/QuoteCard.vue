@@ -1,7 +1,6 @@
 <template>
   <div v-if="isQuoteDefined" class="quote-card-container">
-    <h3 v-if="isRandom">{{ quote.person.name }}</h3>
-    <Img v-if="hasImage" :source="quote.person.image" type="default"/>
+    <NameLink v-if="hasLink" :href="quote.person.url" :name="quote.person.name"/>
     <div class="quote-text">
       <p>{{ quote.quoteText }}</p>
     </div>
@@ -14,20 +13,20 @@
 
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator';
-import Img from '@/components/Img.vue';
 import Button from '@/components/Button.vue';
 import { IQuote } from '@/models/models';
+import NameLink from '@/components/NameLink.vue';
 
 @Component({
   components: {
-    Img,
     Button,
+    NameLink,
   },
 })
 export default class QuoteCard extends Vue {
   @Prop() private quote!: IQuote;
   @Prop() private onQuoteCardButtonClick!: () => void;
-  @Prop({default: true}) private hasImage!: boolean;
+  @Prop({default: true}) private hasLink!: boolean;
   @Prop({default: true}) private isRandom!: boolean;
   @Prop({default: false}) private isQuoteRated!: boolean;
 

@@ -1,7 +1,7 @@
 export interface IPerson {
   id: number;
   name: string;
-  image: string;
+  url: string;
   quotes: IQuote[];
 }
 
