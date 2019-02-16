@@ -22,6 +22,7 @@ export default class NameLink extends Vue {
   text-decoration: none;
   &:hover {
     color: lighten($black, 30%);
+    cursor: pointer;
   }
 }
 </style>

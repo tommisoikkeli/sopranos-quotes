@@ -1,6 +1,6 @@
 <template>
   <div v-if="isQuoteDefined" class="quote-card-container">
-    <NameLink v-if="hasLink" :href="quote.person.url" :name="quote.person.name"/>
+    <NameLink v-if="hasLink" :url="quote.person.url" :name="quote.person.name"/>
     <div class="quote-text">
       <p>{{ quote.quoteText }}</p>
     </div>
