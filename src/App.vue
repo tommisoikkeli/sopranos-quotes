@@ -1,5 +1,8 @@
 <template>
   <div id="app">
+    <div class="header">
+      <h1>Sopranos quotes</h1>
+    </div>
     <div class="nav">
       <router-link to="/">Home</router-link>
       <router-link to="/people">People</router-link>
@@ -22,6 +25,10 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+.header {
+  width: 100%;
+  background: $header-color;
 }
 .nav {
   display: flex;
