@@ -1,6 +1,6 @@
 import { IQuote, IPerson } from '@/models/models';
 
-const apiBaseUrl = 'http://localhost:8080';
+const apiBaseUrl = 'https://stark-wildwood-80556.herokuapp.com';
 const quotesEndpoint = 'quotes';
 const peopleEndpoint = 'people';
 
